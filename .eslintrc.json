@@ -1,0 +1,83 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/strict-type-checked",
+    "plugin:@typescript-eslint/stylistic-type-checked",
+    "plugin:prettier/recommended"
+  ],
+  "root": true,
+  "parserOptions": {
+    "project": true
+},
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "import"],
+  "rules": {
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "ImportDeclaration[source.value='react'] > ImportDefaultSpecifier",
+        "message": "React should be not imported"
+      }
+    ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "interface",
+        "format": ["PascalCase"],
+        "custom": {
+          "regex": "^I[A-Z]",
+          "match": false
+        }
+      }
+    ],
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/consistent-type-imports": ["error", { "disallowTypeAnnotations": false }],
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_", "args": "all", "caughtErrors": "all" }
+    ],
+    // "no-restricted-imports": ["error", { "patterns": ["**/../*", ".*"] }], doesn't make sense with app dir
+    "no-empty-pattern": "error",
+    "no-empty": ["error", { "allowEmptyCatch": true }],
+    "quotes": ["error", "single", { "avoidEscape": true }],
+    "no-console": ["warn"],
+    "import/no-unused-modules": [
+      "off",
+      {
+        "unusedExports": true,
+        "src": ["**/*.ts", "**/*.tsx"],
+        "ignoreExports": ["**/*.d.ts"]
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "alphabetize": { "order": "asc", "caseInsensitive": true }
+      }
+    ],
+    "react/jsx-curly-brace-presence": [
+      "error",
+      { "props": "never", "children": "never", "propElementValues": "always" }
+    ],
+    // "react/jsx-handler-names": [
+    //   "error",
+    //   {
+    //     "eventHandlerPrefix": "handle",
+    //     "eventHandlerPropPrefix": "on",
+    //     "checkLocalVariables": true,
+    //     "checkInlineFunction": true
+    //   }
+    // ],
+    "react/jsx-key": ["error", { "checkFragmentShorthand": true }]
+  }
+}

@@ -1,0 +1,16 @@
+/* CUSTOM SCROLLBAR STYLES */
+.scrollbar::-webkit-scrollbar {
+  @apply h-2.5 w-2.5;
+}
+.scrollbar::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  @apply rounded-lg border-2 border-solid border-slate-500 bg-slate-400;
+}
+.scrollbar::-webkit-scrollbar-track {
+  @apply rounded-lg bg-slate-500;
+}
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-300;
+}
