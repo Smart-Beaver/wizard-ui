@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'scrollbar';
+@import 'react-toastify/dist/ReactToastify.min.css';
+@import 'highlight.js/styles/monokai.css';
+
+
+@layer base {
+  body {
+    @apply font-base;
+  }
+
+  h1,
+  .heading-1 {
+    @apply text-3xl font-bold leading-6;
+  }
+
+  h2,
+  .heading-2 {
+    @apply text-2xl font-semibold leading-6;
+  }
+
+  h3,
+  .heading-3 {
+    @apply text-sm font-medium leading-6;
+  }
+
+  p,
+  .paragraph {
+    @apply text-sm font-normal;
+  }
+}
+
+@layer utilities {
+  .form-code-main-grid-cols {
+    grid-template-columns: 300px 1fr 1fr 1fr;
+  }
+}
+
+@layer components {
+  .main-tab .hljs-keyword {
+    @apply text-main-keyword;
+  }
+
+  .main-tab .hljs-comment {
+    @apply text-main-comment;
+  }
+
+  .main-tab .hljs-meta {
+    @apply text-main-meta;
+  }
+
+  .cargo-tab .hljs-keyword {
+    @apply text-cargo-keyword;
+  }
+
+  .cargo-tab .hljs-comment {
+    @apply text-cargo-comment;
+  }
+
+  .cargo-tab .hljs-meta {
+    @apply text-white;
+  }
+
+  .cargo-tab .hljs-string {
+    @apply text-cargo-string;
+  }
+
+  .cargo-tab .hljs-literal {
+    @apply text-cargo-literal;
+  }
+
+  .toast-container {
+    @apply min-w-content whitespace-nowrap;
+  }
+
+  .toast-container .Toastify__progress-bar--success {
+    @apply bg-teal-400;
+  }
+
+  .toast-container .Toastify__toast--success svg path {
+    @apply fill-teal-400;
+  }
+
+  .toast-container {
+    @apply min-w-content whitespace-nowrap;
+  }
+
+  .toast-container .Toastify__progress-bar--success {
+    @apply bg-teal-400;
+  }
+
+  .toast-container .Toastify__toast--success svg path {
+    @apply fill-teal-400;
+  }
+
+  /* Disable input arrows for Chrome, Safari, etc. */
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Disable input arrows for Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "*.{js,ts,jsx,tsx}": "eslint --format=unix",
+  "*.md": "prettier --list-different"
+}
