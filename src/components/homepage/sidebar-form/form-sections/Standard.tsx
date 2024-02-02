@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react';
 import { useWatch } from 'react-hook-form';
 import { Radio } from '@/components/data-entry/radio/Radio';
 import PSP34DisclaimerModal from '@/components/homepage/sidebar-form/form-sections/PSP34DisclaimerModal';
+import type { PSPUnion } from '@/components/homepage/sidebar-form/formConstants';
 import { SUPPORTED_STANDARDS } from '@/components/homepage/sidebar-form/formConstants';
 
 interface FormValues {
-  standard: string;
+  standard: PSPUnion;
 }
 
 export function Standard() {
   const [open, setOpen] = useState(false);
-  const standardButton: string = useWatch<FormValues>({
+  const standardButton: PSPUnion = useWatch<FormValues>({
     name: 'standard'
   });
 

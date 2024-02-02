@@ -1,6 +1,6 @@
 {
   "name": "smart-beaver-wizard",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "husky": {
     "hooks": {
@@ -33,7 +33,7 @@
     "debounce": "^2.0.0",
     "highlight.js": "^11.9.0",
     "husky": "^8.0.3",
-    "ink-generator": "^0.3.3",
+    "ink-generator": "^0.3.5",
     "next": "14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

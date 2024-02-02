@@ -52,7 +52,7 @@ export default function CodeEditorTabs({ activeTab, handleActiveTab, wasmFileDat
         </select>
       </div>
       <div className="hidden xl:block">
-        <nav className="divide-gray-200 isolate flex rounded-lg" aria-label="Tabs">
+        <nav className="isolate flex rounded-lg" aria-label="Tabs">
           {wasmFileData.map((tab, tabIndex) => (
             <button
               key={tabIndex}
@@ -66,14 +66,10 @@ export default function CodeEditorTabs({ activeTab, handleActiveTab, wasmFileDat
                 tabIndex > 0 ? 'border-l' : '',
                 tabIndex === 0 ? 'rounded-tl-lg' : '',
                 tabIndex === wasmFileData.length - 1 ? 'rounded-tr-lg' : '',
-                'hover:bg-gray-50 group relative min-w-0 flex-1 cursor-pointer overflow-hidden border-b px-4 py-4 text-center text-sm font-medium transition duration-300 focus:z-10'
+                'group relative min-w-0 flex-1 cursor-pointer overflow-hidden border-b px-4 py-4 text-center text-sm font-medium transition duration-300 focus:z-10'
               )}
             >
               <span>{tab.name}</span>
-              <span
-                aria-hidden="true"
-                className={cn(tab.name ? 'bg-indigo-500' : 'bg-transparent', 'absolute inset-x-0 bottom-0 h-0.5')}
-              />
             </button>
           ))}
         </nav>

@@ -1,0 +1,64 @@
+image: docker:latest
+services:
+  - docker:dind
+
+stages:
+  - build_docker
+  - deploy
+
+variables:
+  DOCKER_HOST: "tcp://docker:2375"
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_DRIVER: overlay2
+  RESTART_ONLY:
+    value: "false"
+    description: "Change to 'true' if you want to restart application only."
+
+.update_env_only_exceptions:
+  only:
+    variables:
+      - $RESTART_ONLY != 'true'
+
+.docker-build:
+  image: bentolor/docker-dind-awscli
+  stage: build_docker
+  tags:
+    - docker
+  environment:
+    name: ${CI_COMMIT_REF_NAME}
+  script:
+    - cp "$DOCKER_ENV_VARIABLES" ./.env.local
+    - docker build -t $DOCKER_REGISTRY:$DOCKER_TAG .
+    - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+    - docker push $DOCKER_REGISTRY:$DOCKER_TAG
+
+.deploy:
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  stage: deploy
+  tags:
+    - docker
+  environment:
+    name: ${CI_COMMIT_REF_NAME}
+  script:
+    - echo "sciagam i porownuje zmienne srodowiskowe"
+    - cp "$DOCKER_ENV_VARIABLES" ./local_$ECS_SERVICE.env
+    - aws s3 cp s3://$AWS_DOCKER_ENV_VARIABLES_BUCKET/$ECS_SERVICE/.env aws_$ECS_SERVICE.env || touch aws_$ECS_SERVICE.env
+    - cmp -s local_$ECS_SERVICE.env aws_$ECS_SERVICE.env || aws s3 cp local_$ECS_SERVICE.env s3://$AWS_DOCKER_ENV_VARIABLES_BUCKET/$ECS_SERVICE/.env
+    - aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --force-new-deployment
+
+docker-build:
+  extends:
+    - .update_env_only_exceptions
+    - .docker-build
+  only:
+    refs:
+      - develop
+      - master
+
+deploy:
+  extends:
+    - .deploy
+  only:
+    refs:
+      - develop
+      - master

@@ -11,7 +11,9 @@ export const env = createEnv({
     NEXT_PUBLIC_DOMAIN_URL: z.string().url(),
     NEXT_PUBLIC_DOCS_URL: z.string().url(),
     NEXT_PUBLIC_GITHUB_URL: z.string().url(),
-    NEXT_PUBLIC_CONTACT_EMAIL: z.string().email()
+    NEXT_PUBLIC_CONTACT_EMAIL: z.string().email(),
+    NEXT_PUBLIC_ENVIRONMENT: z.string().optional(),
+    NEXT_PUBLIC_GA_ID: z.string().optional()
   },
 
   runtimeEnv: {
@@ -20,6 +22,8 @@ export const env = createEnv({
     NEXT_PUBLIC_DOMAIN_URL: process.env.NEXT_PUBLIC_DOMAIN_URL,
     NEXT_PUBLIC_DOCS_URL: process.env.NEXT_PUBLIC_DOCS_URL,
     NEXT_PUBLIC_GITHUB_URL: process.env.NEXT_PUBLIC_GITHUB_URL,
-    NEXT_PUBLIC_CONTACT_EMAIL: process.env.NEXT_PUBLIC_CONTACT_EMAIL
+    NEXT_PUBLIC_CONTACT_EMAIL: process.env.NEXT_PUBLIC_CONTACT_EMAIL,
+    NEXT_PUBLIC_ENVIRONMENT: process.env.NEXT_PUBLIC_ENVIRONMENT,
+    NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID
   }
 });
