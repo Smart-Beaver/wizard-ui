@@ -18,18 +18,18 @@ export default function useSidebarFormSubmit() {
   const { setWasmFileData, setWasmCodeFetchingError } = useWasmData();
 
   // This is a workaround for the fact that the Rust code doesn't support PSP34 yet.
-  function filterExtentions(extensions: string[], standard: string): string[] {
+  function filterExtensions(extensions: string[], standard: string): string[] {
     if (standard === STANDARDS.PSP34) {
       return [];
     }
     return extensions;
   }
 
-  const onSubmit = async (data: SidebarFormSchema) => {
-    const { name, symbol, decimals, license, standard, accessControl } = data;
-    const featureExtensions = FEATURES_OPTIONS.filter(({ value }) => data[value as keyof typeof data]).map(
-      ({ value }) => value
-    );
+  return async (data: SidebarFormSchema) => {
+    const { name, symbol, decimals, license, standard, accessControl, isSingleCodeGenerationModeActive } = data;
+    const featureExtensions = FEATURES_OPTIONS[standard]
+      .filter(({ name }) => data[name as keyof typeof data])
+      .map(({ name }) => name);
 
     const shouldIncludeMetadata = Boolean(name || symbol || Number.isFinite(decimals)) ? 'metadata' : '';
     const accessControlExtension = accessControl && accessControl !== '' ? [accessControl] : [];
@@ -39,7 +39,14 @@ export default function useSidebarFormSubmit() {
       if (!URL) throw new Error('API base URL is not defined.');
       const result = await (async (): Promise<FetchDataResponse> => {
         const metadata = new Metadata(name, symbol, undefined, decimals);
-        const contract = new Contract(standard, metadata, filterExtentions(extensions, standard), URL, license);
+        const contract = new Contract(
+          standard,
+          metadata,
+          filterExtensions(extensions, standard),
+          URL,
+          license,
+          isSingleCodeGenerationModeActive
+        );
         return await start(contract);
       })();
 
@@ -55,6 +62,4 @@ export default function useSidebarFormSubmit() {
       console.error(error);
     }
   };
-
-  return onSubmit;
 }

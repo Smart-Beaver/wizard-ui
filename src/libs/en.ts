@@ -2,16 +2,16 @@ export const dictionary = {
   meta: {
     title: 'Smart Beaver',
     description:
-      'An interactive smart contract wizard. Generate ink! code for popular standards like PSP-22, PSP-34 and PSP-37.',
+      'An interactive smart contract wizard. Generate ink! code for popular standards like PSP-22 and PSP-34.',
     ogTwitter: {
       title: 'Smart Beaver',
       description:
-        'An interactive smart contract wizard. Generate ink! code for popular standards like PSP-22, PSP-34 and PSP-37.'
+        'An interactive smart contract wizard. Generate ink! code for popular standards like PSP-22 and PSP-34.'
     },
     ogFacebook: {
       title: 'Smart Beaver',
       description:
-        'An interactive smart contract wizard. Generate ink! code for popular standards like PSP-22, PSP-34 and PSP-37.'
+        'An interactive smart contract wizard. Generate ink! code for popular standards like PSP-22 and PSP-34.'
     }
   },
   global: {
@@ -47,6 +47,9 @@ export const dictionary = {
       metadata: 'metadata'
     },
     sections: {
+      singleFile: {
+        title: 'Single file'
+      },
       metadata: {
         title: 'Settings',
         name: {
@@ -71,7 +74,8 @@ export const dictionary = {
         mintable: 'Mintable',
         burnable: 'Burnable',
         pausable: 'Pausable',
-        capped: 'Capped'
+        capped: 'Capped',
+        enumerable: 'Enumerable'
       },
       accessControl: {
         title: 'Access control',

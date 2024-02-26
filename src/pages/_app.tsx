@@ -1,6 +1,7 @@
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import GoogleTagManager from '@/components/analitics/GoogleTagManager';
 import Fonts from '@/components/layout/Fonts';
 import Layout from '@/components/layout/Layout';
 import MobileView from '@/components/layout/MobileView';
@@ -13,6 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>{dictionary.meta.title}</title>
       </Head>
+      <GoogleTagManager />
       <Fonts />
       <ToastWrapper />
       <Layout>
