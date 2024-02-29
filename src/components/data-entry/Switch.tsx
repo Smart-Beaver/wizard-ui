@@ -10,7 +10,7 @@ interface SwitchProps {
   disabled?: boolean;
 }
 
-export default function Switch({ name, label, disabled }: SwitchProps) {
+export default function Switch({ name, label }: SwitchProps) {
   const {
     fieldState: { error },
     field: { onChange, ...restField }
@@ -24,11 +24,9 @@ export default function Switch({ name, label, disabled }: SwitchProps) {
           onChange={(e) => {
             onChange(e);
           }}
-          disabled={disabled}
           className={cn(
             'border-transparent relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 ',
-            restField.value ? 'bg-teal-600' : 'bg-transparent',
-            disabled && 'opacity-50'
+            restField.value ? 'bg-teal-600' : 'bg-transparent'
           )}
         >
           <span

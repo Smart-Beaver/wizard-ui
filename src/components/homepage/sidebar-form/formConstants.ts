@@ -37,28 +37,6 @@ export const METADATA22 = [
   }
 ] as const;
 
-export const METADATA34 = [
-  {
-    label: dictionary.sidebarForm.sections.metadata.name.title,
-    name: 'name',
-    placeholder: dictionary.sidebarForm.sections.metadata.name.placeholder,
-    inputType: 'text',
-    disabled: true
-  },
-  {
-    label: dictionary.sidebarForm.sections.metadata.symbol.title,
-    name: 'symbol',
-    placeholder: dictionary.sidebarForm.sections.metadata.symbol.placeholder,
-    inputType: 'text',
-    disabled: true
-  }
-] as const;
-
-export const METADATA: { [key in keyof typeof STANDARDS]: typeof METADATA22 | typeof METADATA34 } = {
-  PSP22: METADATA22,
-  PSP34: METADATA34
-};
-
 export const FEATURES_OPTIONS22 = [
   { label: dictionary.sidebarForm.sections.features.mintable, name: 'mintable', disabled: false },
   { label: dictionary.sidebarForm.sections.features.burnable, name: 'burnable', disabled: false },
@@ -69,7 +47,8 @@ export const FEATURES_OPTIONS22 = [
 export const FEATURES_OPTIONS34 = [
   { label: dictionary.sidebarForm.sections.features.mintable, name: 'mintable', disabled: false },
   { label: dictionary.sidebarForm.sections.features.burnable, name: 'burnable', disabled: false },
-  { label: dictionary.sidebarForm.sections.features.enumerable, name: 'enumerable', disabled: true }
+  { label: dictionary.sidebarForm.sections.features.enumerable, name: 'enumerable', disabled: false },
+  { label: dictionary.sidebarForm.sections.features.metadata, name: 'metadata', disabled: false }
 ] as const;
 
 export const FEATURES_OPTIONS: {

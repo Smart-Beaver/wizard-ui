@@ -7,7 +7,7 @@ import Switch from '@/components/data-entry/Switch';
 import AccessControl from '@/components/homepage/sidebar-form/form-sections/AccessControl';
 import Features from '@/components/homepage/sidebar-form/form-sections/Features';
 import License from '@/components/homepage/sidebar-form/form-sections/License';
-import Metadata from '@/components/homepage/sidebar-form/form-sections/Metadata';
+import MetadataPSP22 from '@/components/homepage/sidebar-form/form-sections/MetadataPSP22';
 import Standard from '@/components/homepage/sidebar-form/form-sections/Standard';
 import { STANDARDS } from '@/components/homepage/sidebar-form/formConstants';
 import useSidebarFormSubmit from '@/components/homepage/sidebar-form/useSidebarFormSubmit';
@@ -23,10 +23,12 @@ const schema = z.object({
   decimals: z
     .number()
     .min(0, { message: dictionary.sidebarForm.sections.metadata.decimals.validation.decimalNumberTooLow })
-    .max(18, { message: dictionary.sidebarForm.sections.metadata.decimals.validation.decimalNumberTooHigh }),
+    .max(18, { message: dictionary.sidebarForm.sections.metadata.decimals.validation.decimalNumberTooHigh })
+    .or(z.null()),
   mintable: z.boolean(),
   burnable: z.boolean(),
   pausable: z.boolean(),
+  metadata: z.boolean(),
   enumerable: z.boolean().optional(),
   capped: z.boolean(),
   accessControl: z.union([z.literal('security/ownable'), z.literal('security/control'), z.string().optional()]),
@@ -38,12 +40,13 @@ const defaultValues: SidebarFormSchema = {
   standard: STANDARDS.PSP22,
   name: '',
   symbol: '',
-  decimals: 0,
+  decimals: null,
   mintable: false,
   burnable: false,
   enumerable: false,
   pausable: false,
   capped: false,
+  metadata: false,
   accessControl: '',
   license: '',
   isSingleCodeGenerationModeActive: false
@@ -97,9 +100,9 @@ export default function SidebarForm() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Standard />
           <h2 className="py-6">{dictionary.sidebarForm.sections.singleFile.title}</h2>
-          <Switch name="isSingleCodeGenerationModeActive" disabled={choosenStandard === 'PSP34'} />
+          <Switch name="isSingleCodeGenerationModeActive" />
           <h2 className="py-6">{dictionary.sidebarForm.configure}</h2>
-          <Metadata choosenStandard={choosenStandard} />
+          {choosenStandard === 'PSP22' && <MetadataPSP22 />}
           <Features choosenStandard={choosenStandard} />
           <AccessControl choosenStandard={choosenStandard} />
           <License />

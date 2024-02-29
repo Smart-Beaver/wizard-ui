@@ -1,5 +1,5 @@
 import { Contract, Metadata, start } from 'ink-generator';
-import { FEATURES_OPTIONS, STANDARDS } from '@/components/homepage/sidebar-form/formConstants';
+import { FEATURES_OPTIONS } from '@/components/homepage/sidebar-form/formConstants';
 import type { SidebarFormSchema } from '@/components/homepage/sidebar-form/SidebarForm';
 import { sortWasmResults } from '@/components/homepage/sidebar-form/sortWasmResults';
 import { useWasmData } from '@/contexts/WasmDataContext';
@@ -17,36 +17,23 @@ interface FetchDataResponse {
 export default function useSidebarFormSubmit() {
   const { setWasmFileData, setWasmCodeFetchingError } = useWasmData();
 
-  // This is a workaround for the fact that the Rust code doesn't support PSP34 yet.
-  function filterExtensions(extensions: string[], standard: string): string[] {
-    if (standard === STANDARDS.PSP34) {
-      return [];
-    }
-    return extensions;
-  }
-
   return async (data: SidebarFormSchema) => {
     const { name, symbol, decimals, license, standard, accessControl, isSingleCodeGenerationModeActive } = data;
     const featureExtensions = FEATURES_OPTIONS[standard]
       .filter(({ name }) => data[name as keyof typeof data])
       .map(({ name }) => name);
 
-    const shouldIncludeMetadata = Boolean(name || symbol || Number.isFinite(decimals)) ? 'metadata' : '';
     const accessControlExtension = accessControl && accessControl !== '' ? [accessControl] : [];
-    const extensions = [...featureExtensions, ...accessControlExtension, shouldIncludeMetadata && 'metadata'];
+    const extensions = [...featureExtensions, ...accessControlExtension];
+    if (Boolean(name || symbol || Number.isFinite(decimals))) {
+      extensions.push('metadata');
+    }
 
     try {
       if (!URL) throw new Error('API base URL is not defined.');
       const result = await (async (): Promise<FetchDataResponse> => {
-        const metadata = new Metadata(name, symbol, undefined, decimals);
-        const contract = new Contract(
-          standard,
-          metadata,
-          filterExtensions(extensions, standard),
-          URL,
-          license,
-          isSingleCodeGenerationModeActive
-        );
+        const metadata = new Metadata(name, symbol, undefined, decimals ?? 0);
+        const contract = new Contract(standard, metadata, extensions, URL, license, isSingleCodeGenerationModeActive);
         return await start(contract);
       })();
 
