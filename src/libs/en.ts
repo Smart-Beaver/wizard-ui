@@ -75,7 +75,8 @@ export const dictionary = {
         burnable: 'Burnable',
         pausable: 'Pausable',
         capped: 'Capped',
-        enumerable: 'Enumerable'
+        enumerable: 'Enumerable',
+        metadata: 'Metadata'
       },
       accessControl: {
         title: 'Access control',
@@ -97,12 +98,6 @@ export const dictionary = {
       optimalExperience: 'for the optimal user experience.'
     },
     recommended: 'We recommend accessing the application on a desktop device.'
-  },
-  //This is a part you need to delete together with psp34disclaimermodal
-  modal: {
-    title: 'Disclaimer',
-    description: "The final implementation of PSP34 is still in progress, and we'll update it when it's ready.",
-    button: 'Ok, thanks'
   },
   errors: {
     useWasmData: 'useWasmData must be used within a WasmDataProvider',

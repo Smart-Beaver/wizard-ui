@@ -39,8 +39,8 @@ dependencies:
     specifier: ^8.0.3
     version: 8.0.3
   ink-generator:
-    specifier: ^0.3.5
-    version: 0.3.5
+    specifier: 0.3.8
+    version: 0.3.8
   next:
     specifier: 14.0.0
     version: 14.0.0(@babel/core@7.23.3)(react-dom@18.2.0)(react@18.2.0)
@@ -3479,8 +3479,8 @@ packages:
   /inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
 
-  /ink-generator@0.3.5:
-    resolution: {integrity: sha512-lwG1zzlNrBputifYZnp4f8HltDRO+3t9JRlibGaCzE/4crdZ0pz8W+3XK7tfNZLtsB3VMQScdYLtiQjjoLhBcw==}
+  /ink-generator@0.3.8:
+    resolution: {integrity: sha512-O+fEityf8upnaMxg8YPHqkOPgjDggIPu2Tjf1vgy8Vm+laLtRudQVzcWTiIPFHI5pxBFq3WgIWaNU8NrGCEiEQ==}
     dev: false
 
   /internal-slot@1.0.6:
